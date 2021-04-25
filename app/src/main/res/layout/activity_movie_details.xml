@@ -48,5 +48,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/movieImDet" />
+
+        <TextView
+            android:id="@+id/movieLink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:autoLink="web"
+            android:lineHeight="25dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/movieDet" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

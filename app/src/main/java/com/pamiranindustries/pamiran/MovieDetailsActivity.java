@@ -27,6 +27,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         TextView details = findViewById(R.id.movieDet);
         TextView details2 = findViewById(R.id.movieImDet);
         TextView details3 = findViewById(R.id.movieDate);
+        TextView details4 = findViewById(R.id.movieLink);
         String[] movieDetails = getIntent().getStringArrayExtra("ExtraDetail");
 
 //
@@ -35,6 +36,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         details.setText(movieDetails[4]);
         details2.setText(movieDetails[0]);
         details3.setText(movieDetails[1]);
+        details4.setText(movieDetails[3]);
     }
 
 
