@@ -7,20 +7,8 @@
     android:background="#FFF5B6"
     tools:context=".MoviesActivity">
 
-<!--    <TextView-->
-<!--        android:id="@+id/textviewSec1"-->
-<!--        android:layout_width="235dp"-->
-<!--        android:layout_height="32dp"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:text="@string/textview3"-->
-<!--        android:textColor="@color/purple_700"-->
-<!--        android:textSize="20sp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName4" />-->
 
-
-<!--    <Button-->
+    <!--    <Button-->
 <!--        android:id="@+id/button7"-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->
@@ -70,14 +58,26 @@
 <!--        app:layout_constraintStart_toStartOf="parent"-->
 <!--        app:layout_constraintTop_toBottomOf="@+id/textView5" />-->
 
+    <TextView
+        android:id="@+id/textviewSec1"
+        android:layout_width="111dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/textview3"
+        android:textColor="@color/purple_700"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ListView
         android:id="@+id/movieLiVi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
         android:layout_marginLeft="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textviewSec1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

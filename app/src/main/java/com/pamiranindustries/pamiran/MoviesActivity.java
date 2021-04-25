@@ -59,7 +59,7 @@ public class MoviesActivity extends AppCompatActivity {
 
     public void AnotherActivity(View view) {
 
-                startActivity(new Intent(MoviesActivity.this, MovieDetailsActivity.class));
+        startActivity(new Intent(MoviesActivity.this, MovieDetailsActivity.class));
     }
 
     /**
@@ -84,26 +84,19 @@ public class MoviesActivity extends AppCompatActivity {
             TextView movieTitle = itemView.findViewById(R.id.movieTit);
             TextView movieDirector = itemView.findViewById(R.id.Director);
             TextView movieDate = itemView.findViewById(R.id.Date);
-//            TextView movieDet = itemView.findViewById(R.id.movieDet);
-//            ImageView movieImage = itemView.findViewById(R.id.Image);
 
-            // Placing all in data in the appropriate views
             movieTitle.setText(movies[position][0]);
             movieDate.setText(movies[position][1]);
             movieDirector.setText(movies[position][2]);
-//            movieDet.setText(movies[position][4]);
 
-//            Picasso.get().load(movies[position][3]).into(movieImage);
-
-            // OnClickListener for the view. (Each itemView will act as a button)
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // toast to notify the chosen movie title
-                    Toast.makeText(getApplicationContext(), movies[position][0], Toast.LENGTH_SHORT).show();
+
+                    Toast.makeText(MoviesActivity.this, movies[position][0], Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(MoviesActivity.this, MovieDetailsActivity.class);
-                    // Passing all the details to the next activity
-                    intent.putExtra("EXTRA_MOVIE_DETAILS", movies[position]);
+
+                    intent.putExtra("ExtraDetail", movies[position]);
                     startActivity(intent);
                 }
             });
@@ -122,66 +115,11 @@ public class MoviesActivity extends AppCompatActivity {
             case R.id.item1:
                 Toast.makeText(this,"Item1 selected",Toast.LENGTH_SHORT).show();
                 return true;
-//            case R.id.item2:
-//                Toast.makeText(this,"Item2 selected",Toast.LENGTH_SHORT).show();
-//                return true;
-//            case R.id.item3:
-//                Toast.makeText(this,"Item3 selected",Toast.LENGTH_SHORT).show();
-//                return true;
-//            case R.id.subitem1:
-//                Toast.makeText(this,"SubItem1 selected",Toast.LENGTH_SHORT).show();
-//                return true;
-//            case R.id.subitem2:
-//                Toast.makeText(this,"SubItem2 selected",Toast.LENGTH_SHORT).show();
-//                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-
-//    /**
-//     * MENU
-//     * Shows all the menu options in the ActionBar
-//     */
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.menu, menu);
-//        return true;
-//    }
-//
-//    /**
-//     * MENU
-//     * EventHandler for all the options in the menu
-//     */
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.fire:
-//                Toast.makeText(this, "Fire Baby!", Toast.LENGTH_SHORT).show();
-//                return true;
-//            case R.id.about:
-//                Intent intent = new Intent(getBaseContext(), AboutActivity.class);
-//                startActivity(intent);
-//                return true;
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
-
-//    public void SentMsg(View view) {
-//        Toast.makeText(MoviesActivity.this,"Thank you for your Business! ",Toast.LENGTH_LONG).show();
-//    }
-//    //passing the menu
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.menu2,menu);
-//        return true;
-//    }
-//    public void AnotherActivity(View view) {
-//        startActivity(new Intent(MoviesActivity.this,MovieDetails.class));
-//    }
 
 
 }

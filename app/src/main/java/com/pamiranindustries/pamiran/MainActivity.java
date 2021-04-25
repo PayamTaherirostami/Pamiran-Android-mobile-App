@@ -36,7 +36,7 @@ import java.text.BreakIterator;
 public class MainActivity extends AppCompatActivity {
     private Button button0;
 
-     private String[] myStringArray={"Movies","Service 2","Service 3","Service 4","Service 5","Service 6"};
+    private String[] myStringArray={"Movies","Service 2","Service 3","Service 4","Service 5","Service 6"};
     //    int position;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 //        startActivity(new Intent(MainActivity.this,MoviesActivity.class));\
         Toast.makeText(MainActivity.this,"will work soon!",Toast.LENGTH_LONG).show();
     }
-//    public void makeToast(View view) {
+    //    public void makeToast(View view) {
 //        Button btn = (Button) view;
 //
 //        Toast.makeText(MainActivity.this,"You selected "+btn.getText(),Toast.LENGTH_LONG).show();
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this,"You selected "+btn.getText(),Toast.LENGTH_LONG).show();
             }
         }
-        }
+    }
 
 
 
@@ -158,11 +158,10 @@ public class MainActivity extends AppCompatActivity {
             btn.setId(position);
             btn.setOnClickListener(new BtnOnClickListener());
             return btn;
-            }
-
         }
 
     }
 
+}
 
 
