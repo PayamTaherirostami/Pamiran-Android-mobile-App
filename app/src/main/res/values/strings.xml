@@ -11,4 +11,9 @@
     <string name="imageView2">Logo</string>
     <string name="imageView3">Inbox</string>
     <string name="button7">Send</string>
+    <string name="textview5">Visit us at:</string>
+    <string name="textview6">www.pamiranindustries.com</string>
+    <string name="activity_movies">Movies</string>
+    <string name="activity_main">Pamiran</string>
+    <string name="moviesDetails">Movie Details</string>
 </resources>
