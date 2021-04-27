@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.squareup.picasso.Picasso;
 
 public class MoviesActivity extends AppCompatActivity {
     private Button button7;
@@ -51,7 +52,6 @@ public class MoviesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movies);
 
-        // Initiate ListView, put ListView into the ArrayAdapter
         ListView listView = findViewById(R.id.movieLiVi);
         MovieAdapter adapter = new MovieAdapter(this, movies);
         listView.setAdapter(adapter);
@@ -62,38 +62,37 @@ public class MoviesActivity extends AppCompatActivity {
         startActivity(new Intent(MoviesActivity.this, MovieDetailsActivity.class));
     }
 
-    /**
-     * Inner Adapter class for populating the ListView
-     */
     private class MovieAdapter extends ArrayAdapter<String[]> {
         private final Context context;
         private final String[][] movies;
 
-        public MovieAdapter(Context c, String[][] s) {
-            super(c, -1, s);
+        public MovieAdapter(Context c, String[][] st) {
+            super(c, -1, st);
             context = c;
-            movies = s;
+            movies = st;
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            // inflating and populating the given view (movies_list_item)
+
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View itemView = inflater.inflate(R.layout.movies_list, parent, false);
-            // Identifying each element in the View for population
+            View itemView = inflater.inflate(R.layout.activity_movies, parent, false);
+
             TextView movieTitle = itemView.findViewById(R.id.movieTit);
             TextView movieDirector = itemView.findViewById(R.id.Director);
             TextView movieDate = itemView.findViewById(R.id.Date);
+           ImageView movieImage = itemView.findViewById(R.id.image);
 
             movieTitle.setText(movies[position][0]);
             movieDate.setText(movies[position][1]);
             movieDirector.setText(movies[position][2]);
+           Picasso.get().load(movies[position][3]).into(movieImage);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    Toast.makeText(MoviesActivity.this, movies[position][0], Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MoviesActivity.this, "You selected "+movies[position][0], Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(MoviesActivity.this, MovieDetailsActivity.class);
 
                     intent.putExtra("ExtraDetail", movies[position]);

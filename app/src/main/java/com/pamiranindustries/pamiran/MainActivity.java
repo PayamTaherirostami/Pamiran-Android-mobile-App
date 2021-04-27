@@ -49,28 +49,13 @@ public class MainActivity extends AppCompatActivity {
         gridView.setAdapter(new BtnAdapter(this,myStringArray));
         gridView.setAdapter(adapter);
 
-//        Toolbar toolbar = (Toolbar) findViewById((R.id.toolbar));
-//        setSupportActionBar(toolbar);
-//        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//      String selectedItem = (String) parent.getItemAtPosition(position);
-//
-//                Toast.makeText(MainActivity.this,"You selected "+ selectedItem,Toast.LENGTH_LONG).show();
-//            }
-//        });
-//
+
     }
     public void OtherActivity(View view) {
 //        startActivity(new Intent(MainActivity.this,MoviesActivity.class));\
         Toast.makeText(MainActivity.this,"will work soon!",Toast.LENGTH_LONG).show();
     }
-    //    public void makeToast(View view) {
-//        Button btn = (Button) view;
-//
-//        Toast.makeText(MainActivity.this,"You selected "+btn.getText(),Toast.LENGTH_LONG).show();
-//    }
-    //passing the menu
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
