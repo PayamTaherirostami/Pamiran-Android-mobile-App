@@ -16,4 +16,8 @@
     <string name="activity_movies">Movies</string>
     <string name="activity_main">Pamiran</string>
     <string name="moviesDetails">Movie Details</string>
+    <string name="cameras">Cameras</string>
+    <string name="SeattleCameras">Seattle Traffic Cameras</string>
+    <string name="Warning">Below ListView is populated from JSON Data</string>
+
 </resources>

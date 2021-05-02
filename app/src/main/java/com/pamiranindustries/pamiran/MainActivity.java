@@ -3,9 +3,11 @@ package com.pamiranindustries.pamiran;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,7 +38,7 @@ import java.text.BreakIterator;
 public class MainActivity extends AppCompatActivity {
     private Button button0;
 
-    private String[] myStringArray={"Movies","Service 2","Service 3","Service 4","Service 5","Service 6"};
+    private String[] myStringArray={"Movies","Cameras","Service 3","Service 4","Service 5","Service 6"};
     //    int position;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,32 @@ public class MainActivity extends AppCompatActivity {
     }
     public void OtherActivity(View view) {
 //        startActivity(new Intent(MainActivity.this,MoviesActivity.class));\
-        Toast.makeText(MainActivity.this,"will work soon!",Toast.LENGTH_LONG).show();
+//        Toast.makeText(MainActivity.this,"will work soon!",Toast.LENGTH_LONG).show();
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
+        mBuilder.setIcon(android.R.drawable.sym_def_app_icon);
+        mBuilder.setTitle("About us");
+        mBuilder.setMessage("Hello this is us");
+        mBuilder.setCancelable(false);
+        mBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int which) {
+                dialogInterface.dismiss();
+            }
+        });
+        mBuilder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int which) {
+                Toast.makeText(MainActivity.this,"will work soon!",Toast.LENGTH_LONG).show();
+            }
+        });
+        mBuilder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(MainActivity.this,MoviesActivity.class));
+            }
+        });
+        AlertDialog alertDialog = mBuilder.create();
+        alertDialog.show();
     }
 
     @Override
@@ -92,9 +119,13 @@ public class MainActivity extends AppCompatActivity {
             Button btn = (Button) view;
             if (btn.getText() == "Movies") {
 
-                startActivity(new Intent(MainActivity.this,MoviesActivity.class));
+                startActivity(new Intent(MainActivity.this,MoviesActivity.class));}
+            else if (btn.getText() =="Cameras") {
+                startActivity(new Intent(MainActivity.this,CamerasActivity.class));
 
-            } else {
+                }
+
+             else {
                 Toast.makeText(MainActivity.this,"You selected "+btn.getText(),Toast.LENGTH_LONG).show();
             }
         }

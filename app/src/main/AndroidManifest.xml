@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.pamiranindustries.pamiran">
-   <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,17 +14,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Pamiran">
         <activity
+            android:name=".CamerasActivity"
+            android:label="@string/SeattleCameras"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".MoviesActivity"
             android:label="@string/activity_movies"
-            android:parentActivityName=".MainActivity">
-        </activity>
-
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MovieDetailsActivity"
             android:label="@string/moviesDetails"
-            android:parentActivityName=".MoviesActivity">
-        </activity>
-
+            android:parentActivityName=".MoviesActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
