@@ -18,6 +18,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,6 +31,7 @@ import java.util.ArrayList;
 
 public class CamerasActivity extends AppCompatActivity {
 
+    private GoogleMap mMap;
     private String URLstring = " https://web6.seattle.gov/Travelers/api/Map/Data?zoomId=13&type=2";
     private static ProgressDialog mProgressDialog;
     private ListView listView;
@@ -69,12 +75,17 @@ public class CamerasActivity extends AppCompatActivity {
                         try {
                             JSONObject obj = new JSONObject(response);
                             JSONArray features = obj.getJSONArray("Features");
+
 //                    Log.d("strPayam", ">>" + features.length());
                             for (int j = 0; j < features.length(); j++) {
+                                JSONObject point = features.getJSONObject(j);
+                                JSONArray points = point.getJSONArray("PointCoordinate");
+                                double[] coords={points.getDouble(0),points.getDouble(1)};
+//                                Log.d("strPayam", ">>" + coords);
                                 JSONArray cameras = features.getJSONObject(j).getJSONArray("Cameras");
                                 Camera camera = new Camera(cameras.getJSONObject(0).getString("Description"),
                                         cameras.getJSONObject(0).getString("ImageUrl"),
-                                        cameras.getJSONObject(0).getString("Type"));
+                                        cameras.getJSONObject(0).getString("Type"),coords);
                                 cameraList.add(camera);
                             }
                             setupListview();

@@ -38,7 +38,7 @@ import java.text.BreakIterator;
 public class MainActivity extends AppCompatActivity {
     private Button button0;
 
-    private String[] myStringArray={"Movies","Cameras","Service 3","Service 4","Service 5","Service 6"};
+    private String[] myStringArray={"Movies","Cameras","Map","Service 4","Service 5","Service 6"};
     //    int position;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,8 +121,9 @@ public class MainActivity extends AppCompatActivity {
 
                 startActivity(new Intent(MainActivity.this,MoviesActivity.class));}
             else if (btn.getText() =="Cameras") {
-                startActivity(new Intent(MainActivity.this,CamerasActivity.class));
-
+                startActivity(new Intent(MainActivity.this, CamerasActivity.class));
+            }else if (btn.getText() =="Map") {
+                    startActivity(new Intent(MainActivity.this,TrafficMapActivity.class));
                 }
 
              else {

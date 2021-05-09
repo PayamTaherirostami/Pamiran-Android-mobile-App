@@ -58,6 +58,7 @@ public class ListAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.activity_camera, null, true);
             holder.ImageUrl = (ImageView) convertView.findViewById(R.id.ImageUrl);
             holder.Description = (TextView) convertView.findViewById(R.id.Description);
+
             convertView.setTag(holder);
         }else {
             // the getTag returns the viewHolder object set as a tag to the view
