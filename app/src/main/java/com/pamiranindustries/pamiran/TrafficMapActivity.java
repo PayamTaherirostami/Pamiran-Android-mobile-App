@@ -144,23 +144,18 @@ public class TrafficMapActivity extends FragmentActivity implements OnMapReadyCa
                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(position, 10));
                Marker marker= googleMap.addMarker((markerOptions));
                marker.setTag(i);
-
-
            }
-               googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                  @Override
-                  public boolean onMarkerClick(Marker marker) {
-//                      for (int i = 0; i < cameraList.size(); i++) {
-                          Camera camera = cameraList.get((Integer) marker.getTag());
-                          TextView locs = findViewById(R.id.locations);
-                          locs.setText(camera.getimageurl());
+//           getting location link for each marker
 
-
-//                      }
-                      return false;
-                  }
-              });
-
+//               googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+//                  @Override
+//                  public boolean onMarkerClick(Marker marker) {
+//                          Camera camera = cameraList.get((Integer) marker.getTag());
+//                          TextView locs = findViewById(R.id.locations);
+//                          locs.setText(camera.getimageurl());
+//                      return false;
+//                  }
+//              });
            LatLng latLng= new LatLng( 47.67087823458237, -122.12067053254239);
 //           Log.d("PayamCurrentLoc: ","->"+ latLng);
             Marker marker= googleMap.addMarker(new MarkerOptions().

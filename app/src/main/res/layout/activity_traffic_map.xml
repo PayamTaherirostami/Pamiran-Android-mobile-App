@@ -34,7 +34,7 @@
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/label" />
 
@@ -45,10 +45,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/locations"
-        tools:context=".TrafficMapActivity"
-        tools:layout="@layout/activity_traffic_map" />
+        tools:context=".TrafficMapActivity" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
