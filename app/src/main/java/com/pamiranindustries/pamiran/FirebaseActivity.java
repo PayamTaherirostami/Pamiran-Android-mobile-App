@@ -3,7 +3,7 @@ package com.pamiranindustries.pamiran;
 import android.content.Context;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,14 +37,15 @@ public class FirebaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fire2);
+        setContentView(R.layout.activity_firebase);
 
 //        Toolbar toolbar = findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        Log.d("test","test2");
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
+        Log.d("test3","Current User "+currentUser.toString());
 
         userList = findViewById(R.id.userList);
         listAdapter = new UserListAdapter(this, userData);
@@ -52,14 +53,15 @@ public class FirebaseActivity extends AppCompatActivity {
 
         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
         myRef = mDatabase.getReference("users");
-
+        Log.d("name","user "+currentUser.getDisplayName());
         // update database
         writeNewUser(currentUser.getUid(), currentUser.getDisplayName(), currentUser.getEmail());
-
+        Log.d("name","user "+currentUser.getDisplayName());
         // get list of users
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d("check","test "+ "here");
                 for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
                     // TODO: handle the post
                     Log.d(TAG, userSnapshot.getValue().toString());
@@ -120,11 +122,9 @@ public class FirebaseActivity extends AppCompatActivity {
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View rowView = inflater.inflate(R.layout.list_item, parent, false);
-            TextView title = rowView.findViewById(R.id.editTextUserName);
+            TextView title = rowView.findViewById(R.id.item_title);
             title.setText(values.get(position).username);
-            TextView subtitle = rowView.findViewById(R.id.editTextEmail);
-            subtitle.setText(values.get(position).email);
-
+            TextView subtitle = rowView.findViewById(R.id.item_subtitle);
             subtitle.setText("Updated: " + values.get(position).updated);
 
             return rowView;

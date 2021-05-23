@@ -54,9 +54,9 @@ import java.util.ArrayList;
             public MyViewHolder(@NonNull View itemView) {
                 super(itemView);
 
-                firstName = itemView.findViewById(R.id.tvfirstName);
-                lastName = itemView.findViewById(R.id.tvlastName);
-                age = itemView.findViewById(R.id.tvage);
+//                firstName = itemView.findViewById(R.id.tvfirstName);
+//                lastName = itemView.findViewById(R.id.tvlastName);
+//                age = itemView.findViewById(R.id.tvage);
 
             }
         }
