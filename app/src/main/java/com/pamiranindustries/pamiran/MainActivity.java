@@ -258,7 +258,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     if (task.isSuccessful()) {
                                         Log.d("FIREBASE", "User profile updated.");
                                         // Go to FirebaseActivity
-                                        startActivity(new Intent(MainActivity.this, MoviesActivity.class));
+                                        startActivity(new Intent(MainActivity.this, FirebaseActivity.class));
                                     }
                                 }
                             });

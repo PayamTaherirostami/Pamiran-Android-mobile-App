@@ -3,7 +3,7 @@ package com.pamiranindustries.pamiran;
 import android.content.Context;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,11 +37,11 @@ public class FirebaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_firebase);
+        setContentView(R.layout.fire2);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -120,9 +120,11 @@ public class FirebaseActivity extends AppCompatActivity {
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View rowView = inflater.inflate(R.layout.list_item, parent, false);
-            TextView title = rowView.findViewById(R.id.item_title);
+            TextView title = rowView.findViewById(R.id.editTextUserName);
             title.setText(values.get(position).username);
-            TextView subtitle = rowView.findViewById(R.id.item_subtitle);
+            TextView subtitle = rowView.findViewById(R.id.editTextEmail);
+            subtitle.setText(values.get(position).email);
+
             subtitle.setText("Updated: " + values.get(position).updated);
 
             return rowView;

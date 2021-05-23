@@ -33,5 +33,6 @@
     <string name="your_username">Your Username</string>
     <string name="Profile">Profile</string>
     <string name="Fire">Firebase</string>
+    <string name="below_listview_is_populated_from_firebase">Below ListView is populated from firebase</string>
 
 </resources>
