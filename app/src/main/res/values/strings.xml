@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name"> PamiranIndustries App</string>
     <string name="button">Send the Request</string>
-    <string name="editTextTextEmailAddress">Work Email</string>
+    <string name="editTextTextEmailAddress">Your Email</string>
     <string name="editTextTextPersonName">Your name</string>
-    <string name="textview1">Enter Your Name and Email</string>
+    <string name="textview1">Enter Your Email and Password</string>
     <string name="textview2">Select the Request Type</string>
     <string name="textview3">All Movies:</string>
     <string name="textview4">Please enter your request here.</string>
@@ -24,5 +24,14 @@
     <string name="no_wifi_or_mobile">No wireless or mobile connection.</string>
     <string name="TrafficMap">Traffic Camera Map</string>
     <string name="locations">Locations:</string>
+    <string name="login">Login</string>
+    <string name="your_password">Your password</string>
+    <string name="signUp">Don\'t have an account yet? SignUp HERE!</string>
+    <string name="SignUp">SignUp</string>
+    <string name="Welcome">Welcome</string>
+    <string name="Welcome2">Welcome, Now go to the main page and sign in!</string>
+    <string name="your_username">Your Username</string>
+    <string name="Profile">Profile</string>
+    <string name="Fire">Firebase</string>
 
 </resources>
