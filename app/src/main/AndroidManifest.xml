@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-
+    <uses-permission android:name="android.permission.CAMERA"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,11 +17,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Pamiran">
-
-
-        <activity android:name=".FirebaseActivity"
+        <activity android:name=".CamActivity"
+            android:label="@string/photoSend"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".FirebaseActivity"
             android:label="@string/Fire"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".ProfileActivity"
             android:label="@string/Profile"
@@ -30,6 +32,7 @@
             android:name=".WelcomeActivity"
             android:label="@string/Welcome"
             android:parentActivityName=".MainActivity" />
+
         <uses-library android:name="com.google.android.maps" />
 
         <meta-data

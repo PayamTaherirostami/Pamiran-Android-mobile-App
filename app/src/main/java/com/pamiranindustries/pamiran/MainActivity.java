@@ -2,15 +2,15 @@
 package com.pamiranindustries.pamiran;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,10 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -33,11 +30,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import android.widget.GridView;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.Toolbar;
-
-import java.text.BreakIterator;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button buttonLogin;
@@ -45,8 +37,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText editTextEmail, editTextPassword, editTextUserName;
     ProgressBar progressBar;
     private EditText username;
-    private String[] myStringArray={"Movies","Cameras","Map","Service 4","Service 5","Service 6"};
-
+    private String[] myStringArray={"Movies","T.Cameras","Map","Camera","Service 5","Service 6"};
+    public static final String SHARED_PREFS= "sharedPrefs";
+    public static final String EMAIL= "email";
+    public static final String PASSWORD= "password";
+    public static final String USERNAME= "username2";
+    public  static final String SWITCH1="switch1";
+    private String email;
+    private String password;
+    private String username2;
+    private Switch switch1;
+    private  boolean switchOnOff;
+    private  EmailValidator emailValidator;
+    private static final String TAG = "MainActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,15 +62,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editTextUserName= (EditText) findViewById(R.id.editTextUserName);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
         buttonLogin= (Button) findViewById(R.id.buttonLogin);
+        switch1= (Switch) findViewById(R.id.switch1);
 
         BtnAdapter adapter= new BtnAdapter(MainActivity.this,myStringArray);
         gridView.setAdapter(new BtnAdapter(this,myStringArray));
         gridView.setAdapter(adapter);
 
+        emailValidator=new EmailValidator();
+        editTextEmail.addTextChangedListener(emailValidator);
+
         findViewById(R.id.textViewSignup).setOnClickListener(this);
         findViewById(R.id.buttonLogin).setOnClickListener(this);
 
-
+    loadData();
+    updateViews();
     }
 
 
@@ -139,11 +147,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (btn.getText() == "Movies") {
 
                 startActivity(new Intent(MainActivity.this,MoviesActivity.class));}
-            else if (btn.getText() =="Cameras") {
+            else if (btn.getText() =="T.Cameras") {
                 startActivity(new Intent(MainActivity.this, CamerasActivity.class));
             }else if (btn.getText() =="Map") {
                     startActivity(new Intent(MainActivity.this,TrafficMapActivity.class));
-                }
+                }else if (btn.getText() =="Camera") {
+                startActivity(new Intent(MainActivity.this, CamActivity.class));
+            }
 
              else {
                 Toast.makeText(MainActivity.this,"You selected "+btn.getText(),Toast.LENGTH_LONG).show();
@@ -194,7 +204,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
-//    private void userLogin() {
+
     private void signIn(){
 
         Log.d("FIREBASE", "signIn");
@@ -203,17 +213,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String username = editTextUserName.getText().toString().trim();
         Log.d("FIREBASE", "email:" + email);
         Log.d("FIREBASE", "password:" + password);
-//        if (username.isEmpty()) {
-//            editTextUserName.setError("UserName is required");
-//            editTextUserName.requestFocus();
-//            return;
-//        }
+
+//        testValidation();
+
+
+        if (username.isEmpty()) {
+            editTextUserName.setError("UserName is required");
+            editTextUserName.requestFocus();
+            return;
+        }
 //
-//        if (email.isEmpty()) {
-//            editTextEmail.setError("Email is required");
-//            editTextEmail.requestFocus();
-//            return;
-//        }
+        if (email.isEmpty()) {
+            editTextEmail.setError("Email is required");
+            editTextEmail.requestFocus();
+            return;
+        }
 //
 //        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
 //            editTextEmail.setError("Please enter a valid email");
@@ -221,19 +235,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //            return;
 //        }
 //
-//        if (password.isEmpty()) {
-//            editTextPassword.setError("Password is required");
-//            editTextPassword.requestFocus();
-//            return;
-//        }
-//
-//        if (password.length() < 6) {
-//            editTextPassword.setError("Minimum lenght of password should be 6");
-//            editTextPassword.requestFocus();
-//            return;
-//        }
+        if (password.isEmpty()) {
+            editTextPassword.setError("Password is required");
+            editTextPassword.requestFocus();
+            return;
+        }
 
-//        progressBar.setVisibility(View.VISIBLE);
+        if (password.length() < 6) {
+            editTextPassword.setError("Minimum length of password should be 6");
+            editTextPassword.requestFocus();
+            return;
+        }
+
+        progressBar.setVisibility(View.VISIBLE);
 
 //        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -241,7 +255,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-//                progressBar.setVisibility(View.GONE);
+                progressBar.setVisibility(View.GONE);
                 Log.d("FIREBASE", "signIn:onComplete:" + task.isSuccessful());
 
                 if (task.isSuccessful()) {
@@ -271,7 +285,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
+        saveData();
     }
+    public void saveData() {
+        if (!emailValidator.isValid()) {
+            editTextEmail.setError("invalid email");
+            Log.w("Error:->", "Noting is saved: Invalid email");
+        } else {
+            SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString(EMAIL, editTextEmail.getText().toString());
+            editor.putString(USERNAME, editTextUserName.getText().toString());
+            editor.putString(PASSWORD, editTextPassword.getText().toString());
+//        editor.putBoolean(SWITCH1, switch1.isChecked());
+            editor.apply();
+//        Toast.makeText(this,"Your information is saved",Toast.LENGTH_SHORT).show();
+        }
+    }
+    public void loadData(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
+        email= sharedPreferences.getString(EMAIL,"");
+        password= sharedPreferences.getString(PASSWORD,"");
+        username2 = sharedPreferences.getString(USERNAME,"");
+//        switchOnOff= sharedPreferences.getBoolean(SWITCH1,false);
+    }
+    public void updateViews(){
+
+        editTextEmail.setText(email);
+        editTextUserName.setText(username2);
+        editTextPassword.setText(password);
+//        switch1.setChecked(switchOnOff);
+
+    }
+
+
+// open the other activity from the personal firebase test
 
 //                if (task.isSuccessful()) {
 //                    finish();
@@ -287,17 +335,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
    @Override
     public void onClick(View view) {
         switch (view.getId()) {
-//            case R.id.textViewSignup:
-//                finish();
-//                startActivity(new Intent(this, SignUpActivity.class));
-//                break;
+            case R.id.textViewSignup:
+                finish();
+                startActivity(new Intent(this, SignUpActivity.class));
+                break;
 
             case R.id.buttonLogin:
-//                userLogin();
                 signIn();
                 break;
         }
     }
+
 
 }
 

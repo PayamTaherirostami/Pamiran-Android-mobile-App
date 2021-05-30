@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CamActivity">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="395dp"
+        android:layout_height="481dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:tooltipText="@string/picHere"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+<!--    <shape-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/image"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--        <solid android:color="#FFFFFF" />-->
+
+<!--        <stroke-->
+<!--            android:width="1dp"-->
+<!--            android:color="#000000" />-->
+
+<!--        <padding-->
+<!--            android:bottom="1dp"-->
+<!--            android:left="1dp"-->
+<!--            android:right="1dp"-->
+<!--            android:top="1dp" />-->
+<!--    </shape>-->
+
+    <Button
+        android:id="@+id/btnCam"
+        android:layout_width="167dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/take_photo"
+        android:background="@color/teal_200"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image" />
+
+    <Button
+        android:id="@+id/SendPhoto"
+        android:layout_width="167dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/teal_200"
+        android:text="@string/send_photo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCam" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

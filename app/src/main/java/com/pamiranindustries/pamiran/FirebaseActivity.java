@@ -19,9 +19,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.IgnoreExtraProperties;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 public class FirebaseActivity extends AppCompatActivity {
@@ -42,10 +44,9 @@ public class FirebaseActivity extends AppCompatActivity {
 //        Toolbar toolbar = findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        Log.d("test","test2");
+
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        Log.d("test3","Current User "+currentUser.toString());
 
         userList = findViewById(R.id.userList);
         listAdapter = new UserListAdapter(this, userData);
@@ -53,23 +54,27 @@ public class FirebaseActivity extends AppCompatActivity {
 
         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
         myRef = mDatabase.getReference("users");
-        Log.d("name","user "+currentUser.getDisplayName());
+        Query members = myRef.orderByChild("updated");
+
         // update database
+        assert currentUser != null;
         writeNewUser(currentUser.getUid(), currentUser.getDisplayName(), currentUser.getEmail());
-        Log.d("name","user "+currentUser.getDisplayName());
+
         // get list of users
-        myRef.addValueEventListener(new ValueEventListener() {
+        members.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d("check","test "+ "here");
+                Log.d("FIREBASE", "onDataChange");
+                listAdapter.clear();
                 for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
-                    // TODO: handle the post
-                    Log.d(TAG, userSnapshot.getValue().toString());
-                    String key = userSnapshot.getKey();
-
-                    User user = new User(userSnapshot.child("username").getValue().toString(), userSnapshot.child("email").getValue().toString(), userSnapshot.child("updated").getValue().toString());
-                    userData.add(user);
+                    Object username = userSnapshot.child("username").getValue();
+                    if (username != null) {
+                        User user = new User(username.toString(), userSnapshot.child("email").getValue().toString(), userSnapshot.child("updated").getValue().toString());
+                        userData.add(user);
+                    }
                 }
+                // Firebase doesn't support sort in descending order. Have to reverse in java
+                Collections.reverse(userData);
                 listAdapter.notifyDataSetChanged();
             }
 
@@ -89,7 +94,7 @@ public class FirebaseActivity extends AppCompatActivity {
     }
 
     @IgnoreExtraProperties
-    public class User {
+    public static class User {
 
         public String username;
         public String email;
@@ -107,9 +112,9 @@ public class FirebaseActivity extends AppCompatActivity {
 
     }
 
-    private class UserListAdapter extends ArrayAdapter<User> {
+    private static class UserListAdapter extends ArrayAdapter<User> {
         private final Context context;
-        private ArrayList<User> values;
+        private final ArrayList<User> values;
 
         private UserListAdapter(Context context, ArrayList<User> values) {
             super(context, 0, values);
@@ -125,10 +130,11 @@ public class FirebaseActivity extends AppCompatActivity {
             TextView title = rowView.findViewById(R.id.item_title);
             title.setText(values.get(position).username);
             TextView subtitle = rowView.findViewById(R.id.item_subtitle);
-            subtitle.setText("Updated: " + values.get(position).updated);
+            subtitle.setText(String.format("Updated: %s", values.get(position).updated));
 
             return rowView;
         }
     }
 
 }
+

@@ -34,5 +34,14 @@
     <string name="Profile">Profile</string>
     <string name="Fire">Firebase</string>
     <string name="below_listview_is_populated_from_firebase">Below ListView is populated from firebase</string>
+    <string name="save1">Turn on to save the information</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="username">UserName :</string>
+    <string name="arya">Arya</string>
+    <string name="payam">Payam</string>
+    <string name="photoSend">Send Photo</string>
+    <string name="send_photo">Send Photo</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="picHere">your pic here</string>
 
 </resources>
